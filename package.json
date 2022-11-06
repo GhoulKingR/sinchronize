@@ -14,5 +14,13 @@
   },
   "dependencies": {
     "deasync": "^0.1.28"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheGhoulRe/sinc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheGhoulRe/sinc/issues"
+  },
+  "homepage": "https://github.com/TheGhoulRe/sinc#readme"
 }
