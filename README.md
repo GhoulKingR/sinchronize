@@ -1,6 +1,6 @@
 # Sinchronize
 
-Sinchronize is a library for synchronizing asynchronous functions. The only difference between asychronous functions and ordinary functions is that asychronous function don't block the thread while the runtime is executing the function. asynchronous functions have performance benefits, but as your code grows the asynchronousity may make things harder to understand.
+Sinchronize is a library for synchronizing asynchronous functions. The only difference between asychronous functions and ordinary functions is that asychronous function don't block the thread while the runtime is executing the function. Asynchronous functions have performance benefits, but as your code grows the asynchronousity may make things harder to understand.
 
 Sinchronize allows you to convert an asychronous function to a synchronous function that makes a thread wait for its execution to be completed before proceeding. Although synchronizing a can make your code easier to understand, the thread blocking may have performance drawbacks in your application. Thread blocking may not over-utilize the CPU, but the entire application may experience slow-downs because JavaScript is a single-threaded programming language.
 
