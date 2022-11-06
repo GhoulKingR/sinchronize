@@ -1,6 +1,6 @@
 {
   "name": "sinchronize",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Sinchronize is a library for synchronizing callback-based, and promise-based asynchronous functions",
   "main": "index.js",
   "scripts": {
