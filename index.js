@@ -11,20 +11,20 @@ const util = require('util');
  * a promise-based async function without blocking
  * the thread even as the function is being executed.
  * 
- * The `sinc.asyncFunction` method creates a
+ * The `sinchronize.asyncFunction` method creates a
  * function that executes the asynchronous function,
  * and blocks the  thread until the async function's
  * execution is complete.
  * 
  * # Example
  * ```JS
- * const sinc = require("sinc");
+ * const sinchronize = require("sinchronize");
  * 
  * function delayedHello () {
  *   return new Promise(resolve => setTimeout(() => resolve("Hello"), 10000));
  * }
  * 
- * let fn = sinc.asyncFunction(delayedHello);
+ * let fn = sinchronize.asyncFunction(delayedHello);
  * console.log(fn()); // -> "Hello"
  * ```
  * 
@@ -48,7 +48,7 @@ module.exports.asyncFunction = function(fn) {
  * functions, these types also dont't block the thread
  * while it's being executed.
  * 
- * The `sinc.callback` method creates a function that
+ * The `sinchronize.callback` method creates a function that
  * executes a callback-based async function, while blocking
  * the current thread.
  * 
@@ -60,13 +60,13 @@ module.exports.asyncFunction = function(fn) {
  * 
  * # Example
  * ```JS
- * const sinc = require("sinc");
+ * const sinchronize = require("sinchronize");
  * 
  * function delayedHello (fn) {
  *   setTimeout(() => fn(null, "Hello"), 10000);
  * }
  * 
- * let fn = sinc.callback(delayedHello);
+ * let fn = sinchronize.callback(delayedHello);
  * console.log(fn()); // -> "Hello"
  * ```
  * 
@@ -91,22 +91,22 @@ module.exports.call = {};
  * a promise-based async function without blocking
  * the thread even as the function is being executed.
  * 
- * The `sinc.call.asyncFunction` method synchronously executes a
- * promise-based async function. `sinc.call.asyncFunction` takes
+ * The `sinchronize.call.asyncFunction` method synchronously executes a
+ * promise-based async function. `sinchronize.call.asyncFunction` takes
  * the async function as its first argument, then takes whatever arguments
  * you want to pass to the async function as the remaining arguments.
- * `sinc.call.asyncFunction` then executes the async function,
+ * `sinchronize.call.asyncFunction` then executes the async function,
  * and blocks the current thread until the function is done executing.
  * 
  * # Example
  * ```JS
- * const sinc = require("./index.js");
+ * const sinchronize = require("sinchronize");
  * 
  * function delayedHello (text) {
  *   return new Promise(resolve => setTimeout(() => resolve(text), 1000));
  * }
  * 
- * let result = sinc.call.asyncFunction(delayedHello, "Hello, World");
+ * let result = sinchronize.call.asyncFunction(delayedHello, "Hello, World");
  * console.log(result); // -> "Hello, World"
  * ```
  * 
@@ -135,22 +135,22 @@ module.exports.call.asyncFunction = function(fn, ...args) {
  * functions, these types also dont't block the thread
  * while it's being executed.
  * 
- * The `sinc.call.callback` method synchronously executes a
- * callback-based async function. `sinc.call.callback` takes
+ * The `sinchronize.call.callback` method synchronously executes a
+ * callback-based async function. `sinchronize.call.callback` takes
  * the async function as its first argument, then takes whatever arguments
  * you want to pass to the async function as the remaining arguments.
- * `sinc.call.callback` then executes the async function,
+ * `sinchronize.call.callback` then executes the async function,
  * and blocks the current thread until the function is done executing.
  * 
  * # Example
  * ```JS
- * const sinc = require("./index.js");
+ * const sinchronize = require("sinchronize");
  * 
  * function delayedHello (txt, fn) {
  *   setTimeout(() => fn(null, txt), 1000);
  * }
  * 
- * let result = sinc.call.callback(delayedHello, "Hello, World");
+ * let result = sinchronize.call.callback(delayedHello, "Hello, World");
  * console.log(result); // -> "Hello, World"
  * ```
  * 
