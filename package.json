@@ -1,5 +1,5 @@
 {
-  "name": "sinc",
+  "name": "sinchronize",
   "version": "1.0.0",
   "description": "Sinc is a library for synchronizing callback-based, and promise-based asynchronous functions",
   "main": "index.js",
@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheGhoulRe/sinc.git"
+    "url": "git+https://github.com/TheGhoulRe/sinchronize.git"
   },
   "bugs": {
-    "url": "https://github.com/TheGhoulRe/sinc/issues"
+    "url": "https://github.com/TheGhoulRe/sinchronize/issues"
   },
-  "homepage": "https://github.com/TheGhoulRe/sinc#readme"
+  "homepage": "https://github.com/TheGhoulRe/sinchronize#readme"
 }

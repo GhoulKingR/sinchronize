@@ -1,43 +1,43 @@
-# Sinc.js
+# Sinchronize
 
-Sinc is a library for synchronizing asynchronous functions. The only difference between asychronous functions and ordinary functions is that asychronous function don't block the thread while the runtime is executing the function. asynchronous functions have performance benefits, but as your code grows the asynchronousity may make things harder to understand.
+Sinchronize is a library for synchronizing asynchronous functions. The only difference between asychronous functions and ordinary functions is that asychronous function don't block the thread while the runtime is executing the function. asynchronous functions have performance benefits, but as your code grows the asynchronousity may make things harder to understand.
 
-Sinc allows you to convert an asychronous function to a synchronous function that makes a thread wait for its execution to be completed before proceeding. Although synchronizing a can make your code easier to understand, the thread blocking may have performance drawbacks in your application. Thread blocking may not over-utilize the CPU, but the entire application may experience slow-downs because JavaScript is a single-threaded programming language.
+Sinchronize allows you to convert an asychronous function to a synchronous function that makes a thread wait for its execution to be completed before proceeding. Although synchronizing a can make your code easier to understand, the thread blocking may have performance drawbacks in your application. Thread blocking may not over-utilize the CPU, but the entire application may experience slow-downs because JavaScript is a single-threaded programming language.
 
 ## Installation
 
-To install Sinc into your project, run the command below:
+To install Sinchronize into your project, run the command below:
 ```bash
-$ npm i sinc
+$ npm i sinchronize
 ```
 
 ## Usage
 
-Sinc allows you to synchronize callback-based, and promise-based asychronous functions. In this section, I'll show you how to perform both operations using simple examples.
+Sinchronize allows you to synchronize callback-based, and promise-based asychronous functions. In this section, I'll show you how to perform both operations using simple examples.
 
-* **synchronizing promise-based asynchronous functions**: In the code below, you'll notice the `delayedHello` asynchronous function declared after importing Sinc. The `declaredHello` function is passed to `sinc.asyncFunction` to create a synchronous version of `declaredHello`. When the synchronous version of `declaredHello` is called, the function pauses the main thread for one second before returning what you passed to it.
+* **synchronizing promise-based asynchronous functions**: In the code below, you'll notice the `delayedHello` asynchronous function declared after importing Sinchronize. The `declaredHello` function is passed to `sinchronize.asyncFunction` to create a synchronous version of `declaredHello`. When the synchronous version of `declaredHello` is called, the function pauses the main thread for one second before returning what you passed to it.
 ```JS
-const sinc = require ("sinc");
+const sinchronize = require ("sinchronize");
 
 function delayedHello (text) {
   return new Promise(resolve => setTimeout(() => resolve(text), 1000));
 }
 
-let fn = sinc.asyncFunction (delayedHello);
+let fn = sinchronize.asyncFunction (delayedHello);
 let result = fn ("Hello");
 
 console.log(result); // -> "Hello"
 ```
 
-* **synchronizing callback-based asynchronous functions**: In the code below, you'll notice the `delayedHello` asynchronous function declared after importing Sinc. The `declaredHello` function is passed to `sinc.callback` to create a synchronous version of `declaredHello`. When the synchronous version of `declaredHello` is called, the function pauses the main thread for one second before returning what you passed to it.
+* **synchronizing callback-based asynchronous functions**: In the code below, you'll notice the `delayedHello` asynchronous function declared after importing Sinchronize. The `declaredHello` function is passed to `sinchronize.callback` to create a synchronous version of `declaredHello`. When the synchronous version of `declaredHello` is called, the function pauses the main thread for one second before returning what you passed to it.
 ```JS
-const sinc = require ("sinc");
+const sinchronize = require ("sinchronize");
 
 function delayedHello (txt, fn) {
   setTimeout(() => fn(null, txt), 1000);
 }
 
-let fn = sinc.callback (delayedHello);
+let fn = sinchronize.callback (delayedHello);
 let result = fn ("Hello");
 
 console.log(result); // -> "Hello"
