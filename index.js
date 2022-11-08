@@ -29,7 +29,7 @@ const util = require('util');
  * ```
  * 
  * @since 1.0.0
- * @param { () => Promise<T> } fn
+ * @param { () => Promise<any> } fn
  * @returns () => T
  */
 module.exports.asyncFunction = function(fn) {
