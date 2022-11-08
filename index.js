@@ -116,13 +116,9 @@ module.exports.call = {};
  * @returns any | void
  */
 module.exports.call.asyncFunction = function(fn, ...args) {
-  try {
-    let deFunction = module.exports.asyncFunction(fn);
-    let result = deFunction(...args);
-    return result;
-  } catch (e) {
-    console.error(e);
-  }
+  let deFunction = module.exports.asyncFunction(fn);
+  let result = deFunction(...args);
+  return result;
 }
 
 /**
@@ -157,14 +153,10 @@ module.exports.call.asyncFunction = function(fn, ...args) {
  * @since 1.0.0
  * @param { () => void } fn 
  * @param  {...any} args 
- * @returns any | void
+ * @returns any
  */
 module.exports.call.callback = function(fn, ...args) {
-  try {
-    let deFunction = deasync(fn);
-    let result = deFunction(...args);
-    return result;
-  }catch (e) {
-    console.error(e);
-  }
+  let deFunction = deasync(fn);
+  let result = deFunction(...args);
+  return result;
 }
