@@ -43,7 +43,7 @@ console.log(result); // -> "Hello"
 
 You'll notice that the first `delayedHello` requires a `.then` method to use its result. While, the second `delayedHello` gives you its results directly. Both programs makes the runtime wait for a second before displaying "Hello" in the console. The first `delayedHello` is asynchronous, while the second is synchronous. This means, in the second `delayedHello` the thread waits for the function to finish running before it proceeds with the rest of the program.
 
-## Using in callbacks
+## Using with callbacks
 
 This section shows the difference between using and not using Sinchronize for callbacks in your code. This will give you a good idea of what Sinchronize does:
 
