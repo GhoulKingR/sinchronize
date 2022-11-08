@@ -9,7 +9,7 @@ setTimeout( function() {
 }, 5000);
 ```
 
-`setTimeout` is a callback-based asynchronous function, that waits for a specified period of time to execute a function. In the above function call, `setTimeout` waits 5 seconds before printing "Hello" to the console.
+`setTimeout` is a callback-based asynchronous function, that waits for a specified period of time to execute a function. In the above function call, `setTimeout` waits 5 seconds before printing "Hello" to the console. The anonymous function in the first argument of `setTimeout` above is called a **callback**. 
 
 If you add the line below under `setTimeout`, the runtime prints "This is outside setTimeout" before printing "Hello":
 ```JS
