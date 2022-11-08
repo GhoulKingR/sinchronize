@@ -1,21 +1,31 @@
 # Sinchronize
 
-Sinchronize is a library for synchronizing asynchronous functions. The only difference between asychronous functions and ordinary functions is that asychronous function don't block the thread while the runtime is executing the function. Asynchronous functions have performance benefits, but as your code grows the asynchronousity may make things harder to understand.
+Sinchronize is a library for converting asynchronous functions into synchronous functions. Asynchronous functions return their results asynchronously. JavaScript's runtime doesn't wait for any asynchronous functions' results.
 
-Sinchronize allows you to convert an asychronous function to a synchronous function that makes a thread wait for its execution to be completed before proceeding. Although synchronizing a can make your code easier to understand, the thread blocking may have performance drawbacks in your application. Thread blocking may not over-utilize the CPU, but the entire application may experience slow-downs because JavaScript is a single-threaded programming language.
-
-## Installation
-
-To install Sinchronize into your project, run the command below:
-```bash
-$ npm i sinchronize
+Promise-based functions and callback-based functions are the two major types of asynchronous functions in JavaScript. To use the results of an asynchronous function you need to pass a function to that the asynchronous function calls when its result is ready. For example:
+```JS
+setTimeout( function() {
+  console.log("Hello");
+}, 5000);
 ```
+
+`setTimeout` is a callback-based asynchronous function, that waits for a specified period of time to execute a function. In the above function call, `setTimeout` waits 5 seconds before printing "Hello" to the console.
+
+If you add the line below under `setTimeout`, the runtime prints "This is outside setTimeout" before printing "Hello":
+```JS
+console.log("This is outside setTimeout");
+```
+
+By default, any function you create is synchronous. That means, JavaScript's runtime waits for your function's results before proceeding to the next statement.
+
+Sinchronize uses the thread-blocking capabilities to convert asynchronous functions. With Sinchronize you can construct an asynchronous function that forces JavaScript's runtime to wait for its results.
+
 
 ## Using with promises
 
-This section shows the difference between using and not using Sinchronize for promises in your code. This will give you a good idea of what Sinchronize does:
+The following shows you the difference between using and not using Sinchronize with a promise-based asynchronous function:
 
-* **Without Sinchronize**:
+* Without Sinchronize:
 ```JS
 function delayedHello (text) {
   return new Promise(resolve => setTimeout(() => resolve(text), 1000));
@@ -27,7 +37,7 @@ delayedHello("Hello")
   });
 ```
 
-* **With Sinchronize**:
+* With Sinchronize:
 ```JS
 const sinchronize = require ("sinchronize");
 
@@ -41,13 +51,15 @@ let result = delayedHello("Hello");
 console.log(result); // -> "Hello"
 ```
 
-You'll notice that the first `delayedHello` requires a `.then` method to use its result. While, the second `delayedHello` gives you its results directly. Both programs makes the runtime wait for a second before displaying "Hello" in the console. The first `delayedHello` is asynchronous, while the second is synchronous. This means, in the second `delayedHello` the thread waits for the function to finish running before it proceeds with the rest of the program.
+Looking at the differences you'll notice these two points:
+* Without Sinchronize, you need to pass a callback to a `.then()` method to access the results of `delayedHello`.
+* With Sinchronize, You can access the results of `delayedHello` directly because the runtime waits.
 
 ## Using with callbacks
 
-This section shows the difference between using and not using Sinchronize for callbacks in your code. This will give you a good idea of what Sinchronize does:
+The following shows you the difference between using and not using Sinchronize with a promise-based asynchronous function:
 
-* **Without Sinchronize**:
+* Without Sinchronize:
 ```JS
 function delayedHello (txt, fn) {
   setTimeout(() => fn(null, txt), 1000);
@@ -58,7 +70,7 @@ delayedHello("Hello", function(error, result) {
 });
 ```
 
-* **With Sinchronize**:
+* With Sinchronize:
 ```JS
 const sinchronize = require ("sinchronize");
 
@@ -72,7 +84,9 @@ let result = delayedHello("Hello");
 console.log(result); // -> "Hello"
 ```
 
-You'll notice that the first `delayedHello` requires you to pass a callback function to use its result. While, the second `delayedHello` gives you its results directly. Like the promise section, both programs makes the runtime wait for a second before displaying "Hello" in the console. The first `delayedHello` is asynchronous, while the second is synchronous, also.
+Just like with the promise-based asynchronous function, you'll notice the following similar points:
+* Without Sinchronize, you need to pass a callback the function to access the results of `delayedHello`.
+* With Sinchronize, You can access the results of `delayedHello` directly.
 
 ## License
 MIT License
