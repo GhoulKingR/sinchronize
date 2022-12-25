@@ -8,7 +8,7 @@
  * a promise-based async function without blocking
  * the thread even as the function is being executed.
  * 
- * The `sinchronize.asyncFunction` method creates a
+ * The `sinchronize.promise` method creates a
  * function that executes the asynchronous function,
  * and blocks the  thread until the async function's
  * execution is complete.
@@ -21,7 +21,7 @@
  *   return new Promise(resolve => setTimeout(() => resolve("Hello"), 10000));
  * }
  * 
- * let fn = sinchronize.asyncFunction(delayedHello);
+ * let fn = sinchronize.promise(delayedHello);
  * console.log(fn()); // -> "Hello"
  * ```
  * 
@@ -29,7 +29,7 @@
  * @param { () => Promise<any> } fn
  * @returns () => T
  */
-export function asyncFunction(fn: () => Promise<any>): any;
+export function promise(fn: () => Promise<any>): any;
 
 /**
  * # Summary

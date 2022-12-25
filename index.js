@@ -11,7 +11,7 @@ const util = require('util');
  * a promise-based async function without blocking
  * the thread even as the function is being executed.
  * 
- * The `sinchronize.asyncFunction` method creates a
+ * The `sinchronize.promise` method creates a
  * function that executes the asynchronous function,
  * and blocks the  thread until the async function's
  * execution is complete.
@@ -24,7 +24,7 @@ const util = require('util');
  *   return new Promise(resolve => setTimeout(() => resolve("Hello"), 10000));
  * }
  * 
- * let fn = sinchronize.asyncFunction(delayedHello);
+ * let fn = sinchronize.promise(delayedHello);
  * console.log(fn()); // -> "Hello"
  * ```
  * 
@@ -32,7 +32,7 @@ const util = require('util');
  * @param { () => Promise<any> } fn
  * @returns () => T
  */
-module.exports.asyncFunction = function(fn) {
+module.exports.promise = function(fn) {
   let cbFunction = util.callbackify(fn);
   let deFunction = deasync(cbFunction);
   return deFunction;
