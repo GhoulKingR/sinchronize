@@ -1,82 +1,51 @@
 # Sinchronize
 
-Sinchronize is a library for synchronizing asynchronous functions. Asynchronous functions are functions that delivers their results asynchronously. When a function is asynchronous, the runtime doesn't wait for its result before proceeding with executing the code.
+Welcome to Sinchronize!
 
-JavaScript provides two ways to capture the results of an asynchronous function. The two ways are:
-* **Callbacks**: Callbacks are functions passed as arguments to an asynchronous function to execute when its result is ready. The following is an example of a callback in action:
-```JS
-const sayHello = () => {
-  console.log("Hello");
-}
+Sinchronize is a JavaScript library that allows you to convert asynchronous functions to synchronous functions, making it easier to write sequential code and simplifying your codebase. With Sinchronize, you can write asynchronous code that looks and behaves like synchronous code, without having to worry about callback functions or Promises.
 
-setTimeout (sayHello, 5000);
-```
+Whether you're working with APIs, databases, or any other asynchronous process, Sinchronize can help you write cleaner, more readable code. Try it out today and see how it can improve your development workflow!
 
-In the code above, `setTimeout` is an anonymous function that waits for a period of time before executing a function. `sayHello` is a callback function that `setTimeout` executes. `setTimeout` waits for 5 seconds (5000 milliseconds) to execute `sayHello`.
+# Use cases
 
-* **Promises**: Promises are special JavaScript objects for making asynchronous operations. JavaScript has a `Promise` class for making custom promises. The following is an asynchronous function created with promises:
-```JS
-const sayHello = () => {
-  const promise = new Promise( (resolve, reject) => {
-    setTimeout( () => resolve("Hello"), 5000 );
-  } );
-  return promise;
-}
-```
+Using Sinchronize is straightforward: simply import the library into your project and wrap any asynchronous function with either the `promise` function, or the `callback` function. Sinchronize will handle the rest, returning a synchronous version of the asynchronous function for you to call.
 
-A function becomes asynchronous once it returns a promise. The `sayHello` function above returns "Hello" after 5 seconds. To capture the result of `sayHello`, call a `.then` method after calling the function:
-```JS
-sayHello()
-  .then( (result) => {
-    console.log(result);
-  });
-```
-
-Once you synchronize an asynchronous function you can access its result directly. Because, the runtime will wait for the function's result before proceeding with executing the code.
-
-## Using with promises
-
-To use Sinchronize to create a synchronous version of a promise-based asynchronous function go through the following steps:
-1. Import `asyncFunction` from `sinchronize`.
-2. Pass the asynchronous function to `asyncFunction`.
-
-`asyncFunction` returns the synchronous version of the promise-based function. The code below shows how creating a synchronous version of a callback-based function looks:
+The following list explains the `promise` and `callback` functions, and shows you an example of using them:
+* `promise`: The `promise` function in Sinchronize is a powerful tool that allows you to convert promise-based asynchronous functions into synchronous functions. To use the function, simply pass it a promise-based asynchronous function and it will return a synchronous version of that function. You can then use the synchronous function just like any other synchronous function, without having to worry about dealing with Promises. The example below is shows the function in action:
 ```JS
 const sinchronize = require ("sinchronize");
 
-let delayedHello = sinchronize.asyncFunction(
-  function (text) {
-    return new Promise(resolve => setTimeout(() => resolve(text), 1000));
-  }
-);
+function delayedHello(text) {
+  return new Promise(resolve => setTimeout(() => resolve(text), 1000));
+}
 
-let result = delayedHello("Hello");
+let synchronousFunction = sinchronize.asyncFunction(delayedHello);
+
+let result = synchronousFunction("Hello");
 console.log(result); // -> "Hello"
 ```
 
-`delayedHello` runs synchronously, which means you can get its results directly.
+Originally you'd have to handle the result of the asynchronous function with either the `await` keyword, or the `.then()` method. Sinchronize lets you collect the result directly just like it would with any other synchronous function.
 
-## Using with callbacks
+* `callback`: The callback function in Sinchronize is another useful tool for converting callback-based asynchronous functions into synchronous functions. To use the callback function, simply pass it a callback-based asynchronous function and it will return a synchronous version of that function, just like the `promise` function with a promise-based function. You can then use the synchronous function just like any other synchronous function, without having to worry about dealing with callback functions. The example below converts a callback version of `delayedHello`:
 
-To use Sinchronize to create a synchronous version of a callback-based asynchronous function go through the following steps:
-1. Import `callback` from `sinchronize`.
-2. Pass the asynchronous function to `asyncFunction`.
-
-`callback` returns the synchronous version of the callback-based function. The code below shows how creating a synchronous version of a promise-based function looks:
 ```JS
 const sinchronize = require ("sinchronize");
 
-let delayedHello = sinchronize.callback(
-  function (txt, fn) {
-    setTimeout(() => fn(null, txt), 1000);
-  }
-);
+function delayedHello(txt, fn) {
+  setTimeout(() => fn(null, txt), 1000);
+}
 
-let result = delayedHello("Hello");
+let synchronousFunction = sinchronize.callback(delayedHello);
+
+let result = synchronousFunction("Hello");
 console.log(result); // -> "Hello"
 ```
 
-Like the _Using with promise_ section, `delayedHello` runs synchronously, and you can access its result directly.
+> **Note**: The callback-based function needs to follow the format below:
+> ```JS
+>   let callbackfn = function(...args: Any, function: (returnVal: returnType) => undefined)
+> ``` 
 
 ## License
 MIT License
