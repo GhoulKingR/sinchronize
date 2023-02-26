@@ -2,16 +2,21 @@
 
 Welcome to Sinchronize!
 
-Sinchronize is a JavaScript library that allows you to convert asynchronous functions to synchronous functions, making it easier to write sequential code and simplifying your codebase. With Sinchronize, you can write asynchronous code that looks and behaves like synchronous code, without having to worry about callback functions or Promises.
+Sinchronize (pronounced synchronize) provides functions for converting asynchronous functions to synchronous functions. Synchronous functions fit better in some operations than asynchronous functions, and not every asynchronous function has its synchronous version.
 
-Whether you're working with APIs, databases, or any other asynchronous process, Sinchronize can help you write cleaner, more readable code. Try it out today and see how it can improve your development workflow!
+Asynchronous functions, although great, comes with its drawbacks. They include overcomplicating your codebase, and the program drammatically slowing down when too many asynchronous processes are running.
 
-# Use cases
+## Use cases
 
-Using Sinchronize is straightforward: simply import the library into your project and wrap any asynchronous function with either the `promise` function, or the `callback` function. Sinchronize will handle the rest, returning a synchronous version of the asynchronous function for you to call.
+Sinchronize provides two functions:
+* `promise`: for promise-based asynchronous functions.
+* `callback`: for callback-based asynchronous functions.
 
-The following list explains the `promise` and `callback` functions, and shows you an example of using them:
-* `promise`: The `promise` function in Sinchronize is a powerful tool that allows you to convert promise-based asynchronous functions into synchronous functions. To use the function, simply pass it a promise-based asynchronous function and it will return a synchronous version of that function. You can then use the synchronous function just like any other synchronous function, without having to worry about dealing with Promises. The example below is shows the function in action:
+This section will go over them.
+
+### `promise`
+
+Take the example below:
 ```JS
 const sinchronize = require ("sinchronize");
 
@@ -19,16 +24,17 @@ function delayedHello(text) {
   return new Promise(resolve => setTimeout(() => resolve(text), 1000));
 }
 
-let synchronousFunction = sinchronize.asyncFunction(delayedHello);
+let synchronousFunction = sinchronize.promise(delayedHello);
 
 let result = synchronousFunction("Hello");
 console.log(result); // -> "Hello"
 ```
 
-Originally you'd have to handle the result of the asynchronous function with either the `await` keyword, or the `.then()` method. Sinchronize lets you collect the result directly just like it would with any other synchronous function.
+The `promise` method converts the asynchronous `delayedHello` to the synchronous `synchronousFunction`. `synchronousFunction` operates like `delayedHello`, but it doesn't need the `await` keyword to use its return value.
 
-* `callback`: The callback function in Sinchronize is another useful tool for converting callback-based asynchronous functions into synchronous functions. To use the callback function, simply pass it a callback-based asynchronous function and it will return a synchronous version of that function, just like the `promise` function with a promise-based function. You can then use the synchronous function just like any other synchronous function, without having to worry about dealing with callback functions. The example below converts a callback version of `delayedHello`:
+### `callback`
 
+Let's see the example below:
 ```JS
 const sinchronize = require ("sinchronize");
 
@@ -42,10 +48,10 @@ let result = synchronousFunction("Hello");
 console.log(result); // -> "Hello"
 ```
 
-> **Note**: The callback-based function needs to follow the format below:
-> ```JS
->   let callbackfn = function(...args: Any, function: (returnVal: returnType) => undefined)
-> ``` 
+The `delayedHello` function needs to follow the following format for a successful conversion:
+```JS
+callbackfn = (...args: Any, fn: (returnVal: returnType) => undefined) => undefined
+``` 
 
 ## License
 MIT License
