@@ -1,19 +1,12 @@
 /**
  * # Summary
- * Synchronizes a promise-based async function.
+ * For promise-based functions.
  * 
- * # Description
- * A promise-based async function is a type async
- * function in JavaScript. The runtime executes
- * a promise-based async function without blocking
- * the thread even as the function is being executed.
+ * ## Description
+ * This function creates a synchronous version
+ * of an promise-based asynchronous function.
  * 
- * The `sinchronize.promise` method creates a
- * function that executes the asynchronous function,
- * and blocks the  thread until the async function's
- * execution is complete.
- * 
- * # Example
+ * ## Example
  * ```JS
  * const sinchronize = require("sinchronize");
  * 
@@ -33,25 +26,19 @@ export function promise(fn: () => Promise<any>): any;
 
 /**
  * # Summary
- * Synchronizes a callback-based async function.
+ * For callback-based functions.
  * 
- * # Description
- * A callback-based async function is another type
- * of async functions in JavaScript. Like the promise-based
- * functions, these types also dont't block the thread
- * while it's being executed.
+ * ## Description
+ * Convert your callback asynchronous functions
+ * to synchronous versions.
  * 
- * The `sinchronize.callback` method creates a function that
- * executes a callback-based async function, while blocking
- * the current thread.
- * 
- * For the function to work properly, the callback-based async
- * function must follow the pattern below:
+ * Callbacks should follow this format for a 
+ * successful conversion:
  * ```JS
  * function (...args, (err, result) => void) {}
  * ```
  * 
- * # Example
+ * ## Example
  * ```JS
  * const sinchronize = require("sinchronize");
  * 
